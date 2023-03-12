@@ -1,0 +1,9 @@
+.git/
+conf/
+dashboards/
+env/
+
+.gitignore
+LICENSE
+README.md
+docker-compose.yml
