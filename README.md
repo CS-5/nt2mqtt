@@ -10,6 +10,7 @@ WPILib FRC Network Tables to MQTT
   - Lower-resolution version of the streaming data
   - Use Grafana for post-match analysis of critical systems and sensors
   - Time syncronization to correlate data with points during the match
+  - Leverage Grafana annotations API to highlight segment of data during the match(?)
 
 ## Overview
 
@@ -24,3 +25,12 @@ flowchart
     Telegraf--HTTP API-->InfluxDB
     InfluxDB--Stored Metrics Query-->Grafana
 ```
+
+## Reference Links
+
+- Streaming MQTT sensor data: https://grafana.com/blog/2021/08/12/streaming-real-time-sensor-data-to-grafana-using-mqtt-and-grafana-live/
+  - MQTT data sourcehttps://grafana.com/grafana/plugins/grafana-mqtt-datasource/
+- Streaming Telegraf data: https://grafana.com/tutorials/stream-metrics-from-telegraf-to-grafana/
+- Annotations: https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/annotate-visualizations/
+  - Annotation API: https://grafana.com/docs/grafana/latest/developers/http_api/annotations/
+- 

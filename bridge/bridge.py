@@ -1,7 +1,7 @@
 import ntcore
 import logging
 import argparse
-import time
+from time import sleep
 import paho.mqtt.client as mqtt
 
 # Only write valid types to MQTT
@@ -94,6 +94,6 @@ def main():
                 if data is not None:
                     mq.publish(nt_name_to_mqtt(event.data.topic.getName()), data)
 
-        time.sleep(0.002)
+        sleep(0.002) # Loop every 20ms
     
 if __name__ == "__main__": main()
