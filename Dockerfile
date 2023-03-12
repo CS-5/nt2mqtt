@@ -27,6 +27,6 @@ WORKDIR /app
 COPY --from=venv /app/env ./env
 
 # Copy code
-ADD publisher .
+ADD bridge .
 
 ENTRYPOINT [ "/app/env/bin/python", "nt2mqtt.py" ]
