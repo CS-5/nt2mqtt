@@ -33,4 +33,3 @@ flowchart
 - Streaming Telegraf data: https://grafana.com/tutorials/stream-metrics-from-telegraf-to-grafana/
 - Annotations: https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/annotate-visualizations/
   - Annotation API: https://grafana.com/docs/grafana/latest/developers/http_api/annotations/
-- 
