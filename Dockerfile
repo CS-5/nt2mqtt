@@ -1,4 +1,4 @@
-FROM python:3.11-slim as venv
+FROM python:3.11 as venv
 
 ENV LANG=C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -8,7 +8,6 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /app
 
 # Set up env
-RUN apt-get update && apt-get install build-essential -y
 RUN python -m venv --copies env
 
 # Install dependencies
@@ -28,6 +27,6 @@ WORKDIR /app
 COPY --from=venv /app/env ./env
 
 # Copy code
-COPY . .
+ADD publisher .
 
 ENTRYPOINT [ "/app/env/bin/python", "nt2mqtt.py" ]
