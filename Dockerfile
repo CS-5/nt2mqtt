@@ -1,4 +1,7 @@
-FROM python:3.11 as venv
+FROM python:3.11-slim AS builder
+
+RUN apt update && apt upgrade -y
+RUN apt install build-essential -y
 
 ENV LANG=C.UTF-8
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -7,26 +10,23 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 
 WORKDIR /app
 
-# Set up env
-RUN python -m venv --copies env
-
-# Install dependencies
-COPY requirements.txt .
-RUN /app/env/bin/pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies
+COPY ./bridge/requirements.txt .
+RUN pip install --no-cache-dir --target=/app/dependencies -r requirements.txt
 
 FROM python:3.11-slim
 
-ENV LANG=C.UTF-8
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+# Update packages
+RUN apt update && apt upgrade -y
+RUN apt install libatomic1 -y
 
 WORKDIR /app
 
 # Copy dependencies from builder
-COPY --from=venv /app/env ./env
+COPY --from=builder /app .
+ENV PYTHONPATH="${PYTHONPATH}:/app/dependencies"
 
 # Copy code
 ADD bridge .
 
-ENTRYPOINT [ "/app/env/bin/python", "nt2mqtt.py" ]
+ENTRYPOINT [ "python", "bridge.py" ]
