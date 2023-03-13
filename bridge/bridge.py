@@ -15,7 +15,7 @@ def nt_data_to_mqtt(data: ntcore.ValueEventData) -> str | int | float | None:
     elif data.value.isFloat():
         return data.value.getFloat()
     elif data.value.isBoolean():
-        return "true" if data.value.getBoolean() else "false"
+        return str(data.value.getBoolean()).lower()
     else: 
         return None
 
